@@ -8,6 +8,10 @@ var TEXT_WIDTH = 50;
 var BAR_WIDTH = 40;
 var MAX_BAR_HEIGHT = 150;
 
+function getRandomInt(max) {
+  return Math.round(Math.random() * max);
+}
+
 var getMaxElement = function (arr) {
   var maxElement = arr[0];
 
@@ -51,9 +55,9 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText("Список результатов:", 120, 60);
 
   function randomColor() {
-    var r = Math.floor(Math.random() * 256);
-    var g = Math.floor(Math.random() * 256);
-    var b = Math.floor(Math.random() * 256);
+    var r = getRandomInt(256);
+    var g = getRandomInt(256);
+    var b = getRandomInt(256);
     var color = "#" + r.toString(16) + g.toString(16) + b.toString(16);
     return color;
   }
