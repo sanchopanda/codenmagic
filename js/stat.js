@@ -12,19 +12,18 @@ function getRandomInt(max) {
   return Math.round(Math.random() * max);
 }
 
-var getMaxElement = function (arr) {
+function getMaxElement(arr) {
   var maxElement = arr[0];
-
   for (var i = 0; i < arr.length; i++) {
     if (arr[i] > maxElement) {
       maxElement = arr[i];
     }
   }
-
   return maxElement;
 };
 
 window.renderStatistics = function (ctx, names, times) {
+  //функция отрисовки облака
   var drawCloud = function (x, y, width, heigth) {
     var offset = 10;
     ctx.beginPath();
@@ -41,16 +40,15 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.closePath();
     ctx.fill();
   };
-
+  //отрисовка тени
   ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
   drawCloud(110, 20, 420, 270);
-
+  //отрисовка облака
   ctx.fillStyle = "rgba(256, 256, 256, 1.0)";
   drawCloud(100, 10, 420, 270);
-
+  //отрисовка текста
   ctx.fillStyle = "#000";
   ctx.font = "16px PT Mono";
-
   ctx.fillText("Ура вы победили!", 120, 40);
   ctx.fillText("Список результатов:", 120, 60);
 
@@ -63,11 +61,9 @@ window.renderStatistics = function (ctx, names, times) {
   }
 
   var maxTime = getMaxElement(times);
-
+  //отрисовка гистограммы
   for (var i = 0; i < names.length; i++) {
-
-    ctx.fillStyle = '000';
-
+    ctx.fillStyle = '#000';
     ctx.fillText(
       names[i],
       CLOUD_X + GAP + GAP * i + BAR_WIDTH * i,
@@ -75,7 +71,6 @@ window.renderStatistics = function (ctx, names, times) {
     );
 
     ctx.fillStyle = randomColor();
-
     ctx.fillRect(
       CLOUD_X + GAP + GAP * i + BAR_WIDTH * i,
       CLOUD_Y + 70 + MAX_BAR_HEIGHT,
