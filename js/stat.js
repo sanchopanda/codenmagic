@@ -3,9 +3,15 @@
   var CLOUD_HEIGHT = 270;
   var CLOUD_X = 100;
   var CLOUD_Y = 10;
+  var SHADOW_SHIFT = 10;
   var GAP = 50;
   var BAR_WIDTH = 40;
   var MAX_BAR_HEIGHT = 150;
+  var TEXT_X_INIT = 120;
+  var TEXT_Y_INIT = 40;
+  var TEXT_HEGHT = 20;
+  var BAR_TOP_INIT = 70;
+  var NAMES_TOP_INIT = MAX_BAR_HEIGHT + BAR_TOP_INIT + 20;
 
 
   function getMaxElement(arr) {
@@ -38,15 +44,15 @@
     };
     //отрисовка тени
     ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
-    drawCloud(110, 20, 420, 270);
+    drawCloud(CLOUD_X + SHADOW_SHIFT, CLOUD_Y + SHADOW_SHIFT, CLOUD_WIDTH, CLOUD_HEIGHT);
     //отрисовка облака
     ctx.fillStyle = "rgba(256, 256, 256, 1.0)";
     drawCloud(CLOUD_X, CLOUD_Y, CLOUD_WIDTH, CLOUD_HEIGHT);
     //отрисовка текста
     ctx.fillStyle = "#000";
     ctx.font = "16px PT Mono";
-    ctx.fillText("Ура вы победили!", 120, 40);
-    ctx.fillText("Список результатов:", 120, 60);
+    ctx.fillText("Ура вы победили!", TEXT_X_INIT, TEXT_Y_INIT);
+    ctx.fillText("Список результатов:", TEXT_X_INIT, TEXT_Y_INIT + TEXT_HEGHT);
 
     function randomColor() {
       var r = lib.getRandomInt(256);
@@ -63,13 +69,13 @@
       ctx.fillText(
         names[i],
         CLOUD_X + GAP + GAP * i + BAR_WIDTH * i,
-        CLOUD_Y + 90 + MAX_BAR_HEIGHT
+        CLOUD_Y + NAMES_TOP_INIT
       );
 
       ctx.fillStyle = randomColor();
       ctx.fillRect(
         CLOUD_X + GAP + GAP * i + BAR_WIDTH * i,
-        CLOUD_Y + 70 + MAX_BAR_HEIGHT,
+        CLOUD_Y + BAR_TOP_INIT + MAX_BAR_HEIGHT,
         BAR_WIDTH,
         -(MAX_BAR_HEIGHT * times[i]) / maxTime
       );
