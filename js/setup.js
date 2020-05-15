@@ -22,6 +22,7 @@ function onPopupEscPress(evt) {
 
 function openPopup() {
     setup.classList.remove('hidden');
+    setup.style = '';
     document.addEventListener('keydown', onPopupEscPress);
 };
 
@@ -122,6 +123,64 @@ for (var i = 0; i < wizards.length; i++) {
 }
 similarListElement.appendChild(fragment);
 
-
-
 setup.querySelector('.setup-similar').classList.remove('hidden');
+
+var userPic = document.querySelector('.upload');
+
+
+userPic.addEventListener('mousedown', function (evt) {
+    evt.preventDefault();
+
+    var startCoords = {
+        x: evt.clientX,
+        y: evt.clientY
+    };
+    var dragged = false;
+
+
+    var onMouseMove = function (moveEvt) {
+        moveEvt.preventDefault();
+        dragged = true;
+
+        var shift = {
+            x: startCoords.x - moveEvt.clientX,
+            y: startCoords.y - moveEvt.clientY,
+        };
+
+        startCoords = {
+            x: moveEvt.clientX,
+            y: moveEvt.clientY
+        };
+
+        var moveCoords = {
+            x: setup.offsetLeft - shift.x,
+            y: setup.offsetTop - shift.y
+        };
+
+        setup.style.left = moveCoords.x + 'px';
+
+        setup.style.top = moveCoords.y + 'px';
+
+
+    };
+
+    var onMouseUp = function (upEvt) {
+        upEvt.preventDefault();
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mousedown', onMouseUp);
+
+        if (dragged) {
+            var onClickPrevent = function (evt) {
+                evt.preventDefault();
+                userPic.removeEventListener('click', onClickPrevent)
+            };
+            userPic.addEventListener('click', onClickPrevent);
+        };
+
+        dragged = false;
+
+    };
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+});
