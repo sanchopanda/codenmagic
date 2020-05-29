@@ -21,7 +21,7 @@
             xhr.send();
         },
         save: function (data, onLoad, onError) {
-            var URL = 'https://js.dump.academy/code-and-magick';
+            var URL = 'https://js.dump.academy/code-and-magick/data';
             var xhr = new XMLHttpRequest();
             xhr.responseType = 'json';
             xhr.addEventListener('load', function () {
@@ -39,6 +39,16 @@
             });
             xhr.open('POST', URL);
             xhr.send(data);
+        },
+        getError: function (errorMessage) {
+            var node = document.createElement('div');
+            node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+            node.style.position = 'absolute';
+            node.style.left = 0;
+            node.style.right = 0;
+            node.style.fontSize = '30px';
+            node.textContent = errorMessage;
+            document.body.insertAdjacentElement('afterbegin', node);
         }
     }
 })()

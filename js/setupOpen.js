@@ -10,6 +10,7 @@
 
     function openPopup() {
         setup.classList.remove('hidden');
+        similar.updateFilter();
         document.addEventListener('keydown', onPopupEscPress);
     };
 
@@ -35,7 +36,7 @@
         window.lib.isEnterKey(evt, closePopup);
     });
 
-    // Focus on username condition  
+    // Состояние фокуса на имени 
 
     setupUserName.addEventListener('focus', function () {
         document.removeEventListener('keydown', onPopupEscPress);
